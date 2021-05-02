@@ -50,7 +50,8 @@ public class ChatClient extends Thread
 			
 
 			System.out.println("[system] connecting to chat server ...");
-			socket = new Socket("4.tcp.ngrok.io", 15642); // create socket connection
+			//socket = new Socket("4.tcp.ngrok.io", 15642); // create socket connection
+			socket = new Socket("localhost", serverPort);
 			in = new DataInputStream(socket.getInputStream()); // create input stream for listening for incoming messages
 			out = new DataOutputStream(socket.getOutputStream()); // create output stream for sending messages
 			System.out.println("[system] connected");
@@ -71,12 +72,12 @@ public class ChatClient extends Thread
 		while ((userInput = std_in.readLine()) != null) { // read a line from the console
 
 			if(userInput.length() > 4 &&   userInput.substring(0, 2).equals("//")){
-				if( userInput.split(" ").length<=1){
+				if( userInput.split(" ",2).length<=1){
 					System.out.println("Wrong format!");
 					continue;
 
 				}
-				this.sendPrivateMessage(name,userInput.split(" ")[0].substring(2), userInput.split(" ")[1], out);
+				this.sendPrivateMessage(name,userInput.split(" ")[0].substring(2), userInput.split(" ",2)[1], out);
 				System.out.println("Sending private message");
 
 			}else{
