@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.json.simple.JSONObject;
@@ -114,25 +115,33 @@ public class ChatServer {
 
 	
 
-	public void removeClient(Socket socket) {
+	public void removeClient(Socket socket){
 		synchronized(this) {
 			clients.remove(socket);
+			try {
+				socket.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public boolean dodajIme(String ime,Socket socket) {
 
+		boolean ret = true;
+
 		synchronized(this) {
 
 			if(databaseHashMap.containsKey(ime)){
-				return false;
+				ret = false; 
 			}else{
 				databaseHashMap.put(ime, socket);
 			}
 			
 		}
 
-		return true;
+		return ret;
 	}
 }
 
@@ -184,8 +193,12 @@ class ChatServerConnector extends Thread {
 
 					System.out.println("Nov uporabnik se je povezal z imenom "+ ime);
 					if(!this.server.dodajIme(ime,socket)){//dodaj ime in preveri ce je ze vpisan
-						this.server.removeClient(socket);//disconnect ce je ze vpisan //make exception 
-						return;
+						System.out.println("Uporabnik " + ime+" je ze vpisan!");
+						
+						//this.server.sendToClient("error","Server",ime,"Uporabnik je ze vpisan",formattedDate);
+						this.server.removeClient(this.socket);
+						break ZANKA;
+						
 					}
 				}
 				break;
@@ -249,5 +262,6 @@ class ChatServerConnector extends Thread {
 
 			
 		}
+		
 	}
 }

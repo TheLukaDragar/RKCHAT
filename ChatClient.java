@@ -40,7 +40,7 @@ public class ChatClient extends Thread
 
 		
 			do{	
-			name = std_in.readLine();
+			name = std_in.readLine().trim().replace(" ", "");
 			}
 			while(name.equals(""));
 			
@@ -58,7 +58,9 @@ public class ChatClient extends Thread
 
 			ChatClientMessageReceiver message_receiver = new ChatClientMessageReceiver(in); // create a separate thread for listening to messages from the chat server
 			message_receiver.start(); // run the new thread
-		} catch (Exception e) {
+		}
+		
+		catch (Exception e) {
 			e.printStackTrace(System.err);
 			System.exit(1);
 		}
@@ -204,7 +206,14 @@ class ChatClientMessageReceiver extends Thread {
 
 
 			}
-		} catch (Exception e) {
+		}
+		catch(EOFException e){
+			System.err.println("Server closed connection");
+			System.exit(1);
+
+		}
+		
+		catch (Exception e) {
 			System.err.println("[system] could not read message");
 			e.printStackTrace(System.err);
 			System.exit(1);
