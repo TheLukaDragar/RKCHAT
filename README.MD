@@ -11,6 +11,11 @@
             
 ```
 
+#How to run 
+```code
+java -cp json-simple-1.1.1.jar ChatServer.java
+java -cp json-simple-1.1.1.jar ChatClient.java
+```
 
 1. Enter your name 
 2. send public messages by typing in the console
