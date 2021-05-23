@@ -10,6 +10,11 @@
             "Making the world a better place" 
             
 ```
+#How to run 
+```code
+java -cp json-simple-1.1.1.jar SecureChatServer.java
+java -cp json-simple-1.1.1.jar SecureChatClient.java
+```
 
 #How to run 
 ```code
@@ -17,7 +22,7 @@ java -cp json-simple-1.1.1.jar ChatServer.java
 java -cp json-simple-1.1.1.jar ChatClient.java
 ```
 
-1. Enter your name 
+1. Enter your name / secure name
 2. send public messages by typing in the console
 3. send private messages in the following format "//username message"
 
@@ -25,6 +30,6 @@ java -cp json-simple-1.1.1.jar ChatClient.java
 
 is the revolutionary way to message people without censorship or government interference.
 its Omrežna plast I think, so only top tier agencies can read your messages
-or maybe even they can't.
+or maybe even they can't. We just added SSL!!
 
 CHAT3000 (note the caps) can be used by people in banana republics (definitely not USA) for planning revolution AI POWED STARTUP and not much blockchain anymore after i lost all my house in bitconnect
